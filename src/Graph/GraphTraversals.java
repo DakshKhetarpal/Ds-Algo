@@ -1,10 +1,7 @@
 package Graph;
 
 import javax.print.attribute.IntegerSyntax;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class GraphTraversals {
 
@@ -13,9 +10,10 @@ public class GraphTraversals {
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(1, 2);
+        //cycle edge
         graph.addEdge(2, 0);
         graph.addEdge(1, 3);
-        graph.addEdge(3, 3);
+       graph.addEdge(3, 3);
 
         // we are starting dfs traversal from node 2
         System.out.println("depth first traversal is"); // 2 0 1 3
@@ -24,6 +22,8 @@ public class GraphTraversals {
         //bfs traversal
         System.out.println("breadth first traversal is"); // 2 0 1 3
         graph.bfs(2,4);
+        System.out.println();
+        System.out.println("is cycle present in graph"+graph.isCycleInGraph(2,4)); // 2 0 1 3
     }
 }
 
@@ -102,6 +102,47 @@ class Graph{
                     }
             }
         }
+    }
+
+    public boolean isCycleInGraph(int node,int totalNodes){
+        boolean[] visited=new boolean[totalNodes];
+        boolean[] currentRecursionStack=new boolean[totalNodes];
+        return isCycleInGraphMainFunction(node,visited,currentRecursionStack);
+
+        // if some unconnected nodes are present then we have to check from every starting node(give this answer in challenges)
+//        for(int i = 0; i < totalNodes; i++){
+//            if(isCycleInGraphMainFunction(node,visited,currentRecursionStack))
+//                return true;
+//
+//            return false;
+//        }
+    }
+
+
+    // this function assumes that graph is connected and no node is unreachable from starting node
+    public boolean isCycleInGraphMainFunction(int node,boolean visited[],boolean currentRecursionStack[]){
+
+        // if element is already present in currentRecursionStack then cycle is present
+        if(currentRecursionStack[node]==true)
+            return true;
+
+        // if element is not present in currentRecursionStack but is already visited then we return false and we dont want to recalculate for this visited node again
+        if (visited[node])
+            return false;
+
+        visited[node]=true;
+        currentRecursionStack[node]=true;
+
+        ArrayList<Integer> attachedList=adjacencyList.get(node);
+        Iterator<Integer> i=attachedList.listIterator();
+        if (i.hasNext()){
+            int attachedNode=i.next();
+            if(isCycleInGraphMainFunction(attachedNode,visited,currentRecursionStack))
+                return true;
+        }
+
+        currentRecursionStack[node]=false;
+        return false;
     }
 }
 
