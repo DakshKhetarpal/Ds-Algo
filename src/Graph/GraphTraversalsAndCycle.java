@@ -3,7 +3,7 @@ package Graph;
 import javax.print.attribute.IntegerSyntax;
 import java.util.*;
 
-public class GraphTraversals {
+public class GraphTraversalsAndCycle {
 
     public static void main(String[] args){
         Graph graph=new Graph(4);
@@ -104,6 +104,7 @@ class Graph{
         }
     }
 
+    // this if for directed graph
     public boolean isCycleInGraph(int node,int totalNodes){
         boolean[] visited=new boolean[totalNodes];
         boolean[] currentRecursionStack=new boolean[totalNodes];
