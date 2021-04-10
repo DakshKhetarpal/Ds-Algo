@@ -20,7 +20,7 @@ public class NextGreaterToRight {
         Stack<Integer> stack=new Stack<>() ;
         int answer[] = new int[n];
 
-        //will traverse in reverse order as we want to fill stack in reverse order
+        //will traverse in reverse order as we want to fill stack in reverse order because at any index we want the right array of it
         for(int i=n-1;i>=0;i--){
 
             System.out.println("i"+i);
