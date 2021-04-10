@@ -44,11 +44,13 @@ class Graph{
     }
 
 
+    //Time Complexity:O(V+E) because for every vertice we will call recursive for number of edges that vertice will have, so total calls is total vertice + total edges since each edge is only called once in directed graph
     public void dfs(int node,int totalNodes){
         boolean[] visited=new boolean[totalNodes];
         dfsMainFunction(node ,visited);
     }
 
+    //Time Complexity:O(V+E)
     public void bfs(int node,int totalNodes){
         boolean[] visited=new boolean[totalNodes];
         bfsMainFunction(node,visited);
@@ -85,6 +87,7 @@ class Graph{
         */
         Queue<Integer> queue = new LinkedList<>();
         queue.add(node);
+        //TC:will run v times
         while(!queue.isEmpty()){
             int currentElement=queue.poll();
             System.out.print(currentElement+" ");
@@ -94,6 +97,7 @@ class Graph{
              */
             ArrayList<Integer> attachedList=adjacencyList.get(currentElement);
             Iterator<Integer> i=attachedList.listIterator();
+            //TC:will run number of edges for that particular vertice and total times it will run is E
             while(i.hasNext()){
                 int v=i.next();
                     if(!visited[v]){
@@ -102,6 +106,7 @@ class Graph{
                     }
             }
         }
+        //Total TC for BFS:o(v+e);
     }
 
     // this if for directed graph

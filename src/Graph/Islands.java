@@ -4,6 +4,7 @@ package Graph;
 //https://www.geeksforgeeks.org/find-number-of-islands/
 /*
 the solution is not difficult , we have jo to traverse the matrix and call recursive dfs function if we encounter one which is not visited.
+Time complexity: O(ROW x COL)
  */
 public class Islands {
 
