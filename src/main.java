@@ -1,5 +1,24 @@
+import java.util.Stack;
+
 public class main {
 
+    public void testingArray(int[] arr){
+        arr[0]=4;
+    }
+
+    public boolean isValidSerialization(String preorder) {
+        Stack<String> st=new Stack<>();
+        String[] arr=preorder.split(",");
+        for(int i=arr.length-1;i>=0;i--){
+            if(!arr[i].equals("#")){
+                if(st.size()<2) return false;
+                st.pop();
+                st.pop();
+            }
+            st.push(arr[i]);
+        }
+        return st.size()==1;
+    }
 
     public static void main(String[] args){
         System.out.println("this is main class");
@@ -17,7 +36,14 @@ public class main {
         arr[2][2] = 0;
         arr[2][3] = 1;
 
-        System.out.println(count(arr,3,4));
+        main m=new main();
+        int[] arrT=new int[10];
+        arrT[0]=1;
+        m.testingArray(arrT);
+        System.out.println(arrT[0]);
+       // System.out.println(count(arr,3,4));
+        System.out.println(m.isValidSerialization("1,#"));
+
     }
 
 

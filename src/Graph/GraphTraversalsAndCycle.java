@@ -74,7 +74,7 @@ class Graph{
     bfs traversal is like breadth level order traversal in a tree, logic is also same.
     We maintain a visited array in graph but not in a tree traversal
      */
-    public void bfsMainFunction(int node,boolean[] visited){
+    public void     bfsMainFunction(int node,boolean[] visited){
         visited[node]=true;
        // System.out.println(node+ " ");
 

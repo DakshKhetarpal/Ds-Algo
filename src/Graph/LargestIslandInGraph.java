@@ -1,25 +1,22 @@
 package Graph;
 
-//find number of islands in graph
-//https://www.geeksforgeeks.org/find-number-of-islands/
-/*
-the solution is not difficult , we have jo to traverse the matrix and call recursive dfs function if we encounter one which is not visited.
-Time complexity: O(ROW x COL)
- */
-public class Islands {
+//Finds the size of largest island in graph
+public class LargestIslandInGraph {
 
     static final int ROW = 5, COL = 5;
+    int maxSize=0;
 
     public static void main(String[] args){
 
-        int M[][] = new int[][] { { 1, 1, 0, 0, 0 },
+        int M[][] = new int[][] {
+                { 1, 1, 0, 0, 0 },
                 { 0, 1, 0, 0, 1 },
-                { 1, 0, 0, 1, 1 },
+                { 0, 0, 0, 1, 1 },
                 { 0, 0, 0, 0, 0 },
                 { 1, 0, 1, 0, 1 } };
 
         //making object because countIslands is not static function
-        Islands I = new Islands();
+        LargestIslandInGraph I = new LargestIslandInGraph();
         System.out.println("Number of islands is: " + I.countIslands(M));
 
     }
@@ -34,7 +31,7 @@ public class Islands {
         return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (M[row][col] == 1 && !visited[row][col]);
     }
 
-    void DFS(int M[][], int row, int col, boolean visited[][])
+    void DFS(int M[][], int row, int col, boolean visited[][],int size)
     {
         // These arrays are used to get row and column numbers
         // of 8 neighbors of a given cell
@@ -44,11 +41,13 @@ public class Islands {
 
         // Mark this cell as visited
         visited[row][col] = true;
+        System.out.println("size is "+size);
+        if(size>maxSize) maxSize=size;
 
         // Recur for all connected neighbours
         for (int k = 0; k < 8; ++k)
             if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited))
-                DFS(M, row + rowNbr[k], col + colNbr[k], visited);
+                DFS(M, row + rowNbr[k], col + colNbr[k], visited,++size);
     }
 
     int countIslands(int M[][])
@@ -67,12 +66,12 @@ public class Islands {
                     // visited yet, then new island found, Visit all
                     // cells in this island and increment island count
                     //cells once visited for an island will not be visited again
-                    DFS(M, i, j, visited);
+                    int size=0;
+                    DFS(M, i, j, visited,++size);
                     ++count;
+                    System.out.println("maxSize is "+maxSize);
                 }
 
         return count;
     }
 }
-
-
