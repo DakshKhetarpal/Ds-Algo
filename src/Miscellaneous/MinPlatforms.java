@@ -17,7 +17,7 @@ public class MinPlatforms {
         int platformsNeededCurrently=0;
         int j=0,i=0;
         while(i<n && j<n){
-
+            String s="";
             if(j==n && i<n){
                 platformsNeededCurrently++;
                 i++;

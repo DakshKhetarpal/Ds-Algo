@@ -1,8 +1,5 @@
 package LeetcodeQuestions;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
 import java.util.Arrays;
 
 public class longestCommonSubstring {
